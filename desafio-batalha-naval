@@ -1,0 +1,96 @@
+# Função para exibir qualquer tabuleiro ou matriz
+def exibir_tabuleiro(tabuleiro):
+    for linha in tabuleiro:
+        print(" ".join(str(celula) for celula in linha))
+    print()
+
+# --------------------------
+# NÍVEL NOVATO
+# --------------------------
+def nivel_novato():
+    print("=== Nível Novato ===")
+    tabuleiro = [[0 for _ in range(5)] for _ in range(5)]
+
+    # Navio horizontal (linha 1, colunas 1 a 3)
+    for c in range(1, 4):
+        tabuleiro[1][c] = 3
+        print(f"Navio H: (1,{c})")
+
+    # Navio vertical (coluna 0, linhas 2 a 4)
+    for l in range(2, 5):
+        tabuleiro[l][0] = 3
+        print(f"Navio V: ({l},0)")
+
+    exibir_tabuleiro(tabuleiro)
+
+# --------------------------
+# NÍVEL AVENTUREIRO
+# --------------------------
+def nivel_aventureiro():
+    print("=== Nível Aventureiro ===")
+    tabuleiro = [[0 for _ in range(10)] for _ in range(10)]
+
+    # Navio horizontal (linha 0, colunas 0 a 3)
+    for c in range(0, 4):
+        tabuleiro[0][c] = 3
+
+    # Navio vertical (coluna 9, linhas 5 a 8)
+    for l in range(5, 9):
+        tabuleiro[l][9] = 3
+
+    # Navio diagonal (\)
+    for i in range(4):
+        tabuleiro[2+i][2+i] = 3
+
+    # Navio diagonal (/)
+    for i in range(4):
+        tabuleiro[6+i][3-i] = 3
+
+    exibir_tabuleiro(tabuleiro)
+
+# --------------------------
+# NÍVEL MESTRE - HABILIDADES
+# --------------------------
+
+# Cone (ex: explosão em V)
+def habilidade_cone(tamanho=5):
+    print("=== Habilidade: Cone ===")
+    matriz = [[0 for _ in range(tamanho)] for _ in range(tamanho)]
+    centro = tamanho // 2
+    for i in range(tamanho):
+        for j in range(tamanho):
+            if abs(j - centro) <= i:
+                matriz[i][j] = 1
+    exibir_tabuleiro(matriz)
+
+# Cruz (linha e coluna centrais)
+def habilidade_cruz(tamanho=5):
+    print("=== Habilidade: Cruz ===")
+    matriz = [[0 for _ in range(tamanho)] for _ in range(tamanho)]
+    centro = tamanho // 2
+    for i in range(tamanho):
+        matriz[centro][i] = 1
+        matriz[i][centro] = 1
+    exibir_tabuleiro(matriz)
+
+# Octaedro (área em forma de losango)
+def habilidade_octaedro(tamanho=5):
+    print("=== Habilidade: Octaedro ===")
+    matriz = [[0 for _ in range(tamanho)] for _ in range(tamanho)]
+    centro = tamanho // 2
+    for i in range(tamanho):
+        for j in range(tamanho):
+            if abs(i - centro) + abs(j - centro) <= centro:
+                matriz[i][j] = 1
+    exibir_tabuleiro(matriz)
+
+# --------------------------
+# Execução dos níveis
+# --------------------------
+
+# Chamar todas as fases
+nivel_novato()
+nivel_aventureiro()
+habilidade_cone()
+habilidade_cruz()
+habilidade_octaedro()
